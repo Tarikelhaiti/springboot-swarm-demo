@@ -13,12 +13,14 @@ secrets:
     external: true
 
 services:
-  postgres:
+    postgres:
     image: postgres:16
     environment:
       POSTGRES_DB: appdb
       POSTGRES_USER: app
       POSTGRES_PASSWORD_FILE: /run/secrets/db_password
+    secrets:
+      - db_password        # <-- AJOUTE CETTE SECTION
     volumes:
       - pgdata:/var/lib/postgresql/data
     networks: [app_net]
